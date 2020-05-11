@@ -125,8 +125,8 @@ class MPlayer extends EventEmitter {
 
     async attachListeners() {
         this.on("timechange", (time) => {
-            this.position = time;
-            this.emit("time", time);
+            this.position = time * 1000;
+            this.emit("time", time * 1000);
         });
         return this;
     }

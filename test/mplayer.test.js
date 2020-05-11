@@ -74,6 +74,26 @@ describe("MPlayer test", () => {
             .finally(() => player.kill());
     });
 
+    it("will judge time in MS", (done) => {
+        var player = new MPlayer();
+
+        player
+            .spawn()
+            .then(() => player.loadFile(sampleFile))
+            .then(() => player.play())
+            .then(() => Promise.delay(1200))
+            .then(() => {
+                player.on('time', (time) => {
+                    if(time > 1000) {
+                        done()
+                    } else {
+                        done('small time')
+                    }
+                })
+            })
+            .finally(() => player.kill())
+    })
+
     it("will pause and restart file", () => {
         var player = new MPlayer();
 
