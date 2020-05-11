@@ -182,9 +182,9 @@ class MPlayer extends EventEmitter {
             this.once("loaded", fireLoadedAfterDelay);
 
             if (autoplay) {
-                this.send("loadfile", [filename]);
+                this.send("loadfile", [`"${filename}"`]);
             } else {
-                this.send("pausing loadfile", [filename]);
+                this.send("pausing loadfile", [`"${filename}"`]);
             }
         });
     }

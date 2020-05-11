@@ -1,6 +1,7 @@
 const assert = require("assert");
 const path = require("path");
 const Promise = require("bluebird");
+
 const sampleFile = path.join(__dirname, "sample.mp3");
 
 var MPlayer = require("../index.js");
@@ -37,6 +38,16 @@ describe("MPlayer test", () => {
         return player
             .spawn()
             .then((player) => player.loadFile(sampleFile))
+            .finally(() => player.kill());
+    });
+
+    it("will load a file with spaces", async () => {
+        var player = new MPlayer();
+
+        const filename = path.join(__dirname, "sample with spaces.mp3");
+        return player
+            .spawn()
+            .then((player) => player.loadFile(filename))
             .finally(() => player.kill());
     });
 
@@ -77,7 +88,7 @@ describe("MPlayer test", () => {
             .finally(() => player.kill());
     });
 
-    it("will pause and restart file", () => {
+    it("will change the speed", () => {
         var player = new MPlayer();
 
         return player
