@@ -95,30 +95,29 @@ class MPlayer extends EventEmitter {
         this.options = {
             verbose: false,
             debug: false,
-            playerPath: isWindows()
-                ? path.resolve(__dirname, "./mplayerwin/mplayer.exe")
-                : "mplayer",
         };
         Object.assign(this.options, options);
-
+        this.playerPath =
+            this.options.playerPath ||
+            (isWindows()
+                ? path.resolve(__dirname, "./mplayerwin/mplayer.exe")
+                : "mplayer");
         this.args = [];
     }
 
     async spawn() {
         return new Promise((resolve, reject) => {
             this.once("ready", () => {
-                console.log("it was ready");
                 resolve(this);
             });
 
-            try {
-                this.instance = spawn(
-                    this.playerPath,
-                    defaultArgs.concat(this.args)
-                );
-            } catch (err) {
+            this.instance = spawn(
+                this.playerPath,
+                defaultArgs.concat(this.args)
+            );
+            this.instance.on('error', (err) => {
                 reject(new Error("mplayer not installed"));
-            }
+            });
             this.instance.stdout.on("data", this.onData.bind(this));
             this.instance.stderr.on("data", this.onError.bind(this));
         }).then(this.attachListeners.bind(this));
@@ -134,7 +133,6 @@ class MPlayer extends EventEmitter {
 
     async kill() {
         return new Promise((resolve) => {
-            console.log("Going to kill");
             this.once("exiting", () => {
                 resolve(this);
             });
