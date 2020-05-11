@@ -1,0 +1,31 @@
+{
+    "name": "mplayer-bin",
+    "version": "0.0.1",
+    "description": "Promises-driven node.js wrapper for MPlayer",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jsoma/mplayer-promises.git"
+    },
+    "keywords": [
+        "mplayer",
+        "video",
+        "audio",
+        "player"
+    ],
+    "author": "Jonathan Soma",
+    "license": "GPL3",
+    "bugs": {
+        "url": "https://github.com/jsoma/mplayer-promises/issues"
+    },
+    "homepage": "https://github.com/jsoma/mplayer-promises",
+    "dependencies": {
+        "bluebird": "^3.7.2"
+    },
+    "devDependencies": {
+        "mocha": "^7.1.2"
+    }
+}
