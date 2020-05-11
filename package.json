@@ -1,6 +1,6 @@
 {
     "name": "mplayer-promises",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Promises-driven node.js wrapper for MPlayer",
     "main": "index.js",
     "scripts": {
